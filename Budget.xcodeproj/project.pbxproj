@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		221645E6203731C800EB6674 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 221645E5203731C800EB6674 /* README.md */; };
+		221645E82037320A00EB6674 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221645E72037320A00EB6674 /* TransactionViewController.swift */; };
+		221645EA2037325D00EB6674 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221645E92037325D00EB6674 /* DataManager.swift */; };
 		22749E961FD5F07E009B1F2D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22749E901FD5F07E009B1F2D /* LaunchScreen.xib */; };
 		22749E971FD5F07E009B1F2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22749E911FD5F07E009B1F2D /* Assets.xcassets */; };
 		22749E981FD5F07E009B1F2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22749E921FD5F07E009B1F2D /* Main.storyboard */; };
@@ -17,6 +19,8 @@
 
 /* Begin PBXFileReference section */
 		221645E5203731C800EB6674 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		221645E72037320A00EB6674 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
+		221645E92037325D00EB6674 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		22749E901FD5F07E009B1F2D /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		22749E911FD5F07E009B1F2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22749E931FD5F07E009B1F2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -40,6 +44,8 @@
 			isa = PBXGroup;
 			children = (
 				22749E941FD5F07E009B1F2D /* AppDelegate.swift */,
+				221645E72037320A00EB6674 /* TransactionViewController.swift */,
+				221645E92037325D00EB6674 /* DataManager.swift */,
 				22749E901FD5F07E009B1F2D /* LaunchScreen.xib */,
 				22749E911FD5F07E009B1F2D /* Assets.xcassets */,
 				22749E921FD5F07E009B1F2D /* Main.storyboard */,
@@ -142,6 +148,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				22749E991FD5F07E009B1F2D /* AppDelegate.swift in Sources */,
+				221645EA2037325D00EB6674 /* DataManager.swift in Sources */,
+				221645E82037320A00EB6674 /* TransactionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,7 +279,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/LighthouseLabsAssignment/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Budget/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.lighthouse-labs.Budget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -286,7 +294,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/LighthouseLabsAssignment/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Budget/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.lighthouse-labs.Budget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
