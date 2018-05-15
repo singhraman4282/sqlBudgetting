@@ -41,13 +41,24 @@ class TransactionViewControllerclass: UIViewController {
       return
     }
     
-    let amount = NSDecimalNumber(string:amountString)
+    let amount = NSDecimalNumber(string: amountString)
+    if amount == NSDecimalNumber.notANumber {
+      alertUserToEnterAValidNumber()
+      return
+    }
     let time = datePicker.date
     
     print("Spent \(amountString) at \(time)")
     
     dataManager.spend(amount: amount, time: time)
     updateRemainingLabel()
+  }
+  
+  private func alertUserToEnterAValidNumber() {
+    let alert = UIAlertController(title: "Error!", message: "Please enter a valid amount.", preferredStyle: .alert)
+    let action = UIAlertAction(title: "Okay", style: .default, handler: nil)
+    alert.addAction(action)
+    present(alert, animated: true, completion: nil)
   }
   
 }
