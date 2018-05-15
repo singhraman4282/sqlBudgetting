@@ -21,5 +21,20 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
+  
+  func applicationDidFinishLaunching(_ application: UIApplication) {
+    let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+    NSLog("Document Path: %@", documentsPath)
+    
+    
+    
+  }//applicationDidFinishLaunching
+  
+  
+  
+  
+  
+  
+  
 }
 

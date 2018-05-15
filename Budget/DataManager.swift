@@ -19,16 +19,113 @@
 import UIKit
 
 class DataManager: NSObject {
+  let database = SQLiteDatabase()
+
 
   let dailyBudget = NSDecimalNumber(string: "10.00")
   var spent = NSDecimalNumber(string: "0.00")
   
   func budgetRemainingToday() -> NSDecimalNumber {
-    return dailyBudget.subtracting(spent)
+//    print("remaining Budget is \(dailyBudget)")
+    
+    return dailyBudget.subtracting(sumOfTodayTransactions())
+    
+//    return dailyBudget.subtracting(spent)
+    
   }
   
   func spend(amount: NSDecimalNumber, time: Date) {
     spent = spent.adding(amount)
   }
+  
+  func openDatabase() {
+    /*
+    database.closeDatabase()
+    try? database.openDatabase(name: "test-database.db")
+    
+    let cq = """
+    SELECT id, amount, timestamp
+    FROM transactions;
+  """
+    
+    var arrayOfAllTransactions = [[String: String]]()
+    do {
+      arrayOfAllTransactions = try database.execute(complexQuery: cq)
+      print(arrayOfAllTransactions.count)
+    }
+    catch let error {
+      print("error \(error)")
+    }
+*/
+  }//openDatabase
+  
+  func setupDatabase() {
+    
+    let isPreloaded = UserDefaults.standard.bool(forKey: "initial_data_added_to_database")
+    if !isPreloaded {
+      UserDefaults.standard.set(true, forKey: "initial_data_added_to_database")
+    try? database.openDatabase(name: "test-database.db")
+      addTablesToDatabase()
+    }//IF
+  }//setupDatabase
+  
+  func addTablesToDatabase() {
+    //    try? database.openDatabase(name: "test-database.db")
+    try? database.execute(simpleQuery: """
+CREATE TABLE daily_budgets (
+  id INTEGER PRIMARY KEY,
+  amount NUMERIC
+   );
+
+CREATE TABLE transactions (
+  id INTEGER PRIMARY KEY,
+  amount NUMERIC,
+  timestamp INTEGER
+   );
+""")
+  }//addTablesToDatabase
+  
+  func createTransaction(amount:NSDecimalNumber, time:Int) {
+    try? database.execute(simpleQuery: """
+      INSERT INTO daily_budgets (amount)
+      VALUES ('\(budgetRemainingToday())');
+      
+      INSERT INTO transactions (amount, timestamp)
+      VALUES ('\(amount)', '\(time)');
+      """)
+  }
+  
+  func sumOfTodayTransactions()->(NSDecimalNumber) {
+    database.closeDatabase()
+    try? database.openDatabase(name: "test-database.db")
+    
+    let cq = """
+    SELECT SUM(amount)
+    FROM transactions
+  WHERE date(timestamp, 'unixepoch') = date('now');
+  """
+    
+    var arrayOfAllTransactions = [[String: String]]()
+    do {
+      arrayOfAllTransactions = try database.execute(complexQuery: cq)
+      print(arrayOfAllTransactions)
+      
+    }
+    catch let error {
+      print("error \(error)")
+    }
+    
+    let dict = arrayOfAllTransactions[0]
+    let spentDollas = dict["SUM(amount)"]
+    
+    let amount = NSDecimalNumber(string: spentDollas)
+    print(amount)
+    
+    
+    
+    
+    return amount
+    
+  }//sumOfTodaysTransactions
   
 }

@@ -25,10 +25,22 @@ class TransactionViewControllerclass: UIViewController {
   @IBOutlet weak var datePicker: UIDatePicker!
   
   let dataManager = DataManager()
+  let database = SQLiteDatabase()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+//    try? database.openDatabase(name: "test-database.db")
+    
+    dataManager.openDatabase()
     updateRemainingLabel()
+//    setupDatabase()
+
+    dataManager.setupDatabase()
+    dataManager.sumOfTodayTransactions()
+    
+    
+    
+    
   }
   
   func updateRemainingLabel() {
@@ -52,6 +64,9 @@ class TransactionViewControllerclass: UIViewController {
     
     dataManager.spend(amount: amount, time: time)
     updateRemainingLabel()
+    
+    dataManager.createTransaction(amount: amount, time: Int(time.timeIntervalSince1970))
+    
   }
   
   private func alertUserToEnterAValidNumber() {
@@ -61,5 +76,25 @@ class TransactionViewControllerclass: UIViewController {
     present(alert, animated: true, completion: nil)
   }
   
-}
+  
+  
+  
+  
+ 
+  
+}//end
+
+
+/*
+ try? database.execute(simpleQuery: """
+ INSERT INTO daily_budgets (amount)
+ VALUES ('amount');
+ 
+ INSERT INTO transactions (amount, timestamp)
+ VALUES ('amount', 'toad');
+ 
+ 
+ """)
+ 
+ */
 
