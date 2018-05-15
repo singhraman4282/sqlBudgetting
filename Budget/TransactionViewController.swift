@@ -63,10 +63,10 @@ class TransactionViewControllerclass: UIViewController {
     print("Spent \(amountString) at \(time)")
     
     dataManager.spend(amount: amount, time: time)
-    updateRemainingLabel()
+    
     
     dataManager.createTransaction(amount: amount, time: Int(time.timeIntervalSince1970))
-    
+    updateRemainingLabel()
   }
   
   private func alertUserToEnterAValidNumber() {
