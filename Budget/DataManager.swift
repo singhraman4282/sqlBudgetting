@@ -128,4 +128,87 @@ CREATE TABLE transactions (
     
   }//sumOfTodaysTransactions
   
+  
+  func allOfTodaysTransactions()->[[String:String]] {
+    database.closeDatabase()
+    try? database.openDatabase(name: "test-database.db")
+    
+    let cq = """
+    SELECT amount, date(timestamp, 'unixepoch') AS date
+    FROM transactions
+  WHERE date(timestamp, 'unixepoch') = date('now')
+  ORDER BY amount DESC;
+  """
+    
+    var arrayOfAllTransactions = [[String: String]]()
+    do {
+      arrayOfAllTransactions = try database.execute(complexQuery: cq)
+      print(arrayOfAllTransactions)
+      
+    }
+    catch let error {
+      print("error \(error)")
+    }
+    
+    return arrayOfAllTransactions
+    
+  }//allOfTodaysTransactions
+  
+  
+  func convertIntToDate(timeInt:Int)->[[String:String]] {
+    database.closeDatabase()
+    try? database.openDatabase(name: "test-database.db")
+    
+    let cq = """
+    SELECT date(\(timeInt), 'unixepoch') AS date
+    
+  """
+    
+    var arrayOfAllTransactions = [[String: String]]()
+    do {
+      arrayOfAllTransactions = try database.execute(complexQuery: cq)
+      print(arrayOfAllTransactions)
+      
+    }
+    catch let error {
+      print("error \(error)")
+    }
+    
+    return arrayOfAllTransactions
+  }//convertIntToDate
+  
+
+func transOnThatDay(date:Int)-> [[String: String]]{
+  database.closeDatabase()
+  try? database.openDatabase(name: "test-database.db")
+  
+  let cq = """
+  SELECT amount, date(timestamp, 'unixepoch') AS date
+    FROM transactions
+  WHERE date(timestamp, 'unixepoch') = date(\(date), 'unixepoch')
+  ORDER BY amount DESC;
+  """
+  
+  var arrayOfAllTransactions = [[String: String]]()
+  do {
+    arrayOfAllTransactions = try database.execute(complexQuery: cq)
+//    print(arrayOfAllTransactions)
+    
+  }
+  catch let error {
+    print("error \(error)")
+  }
+  
+  return arrayOfAllTransactions
+}//transOnThatDay
+
 }
+/*
+ SELECT amount, date(timestamp, 'unixepoch') FROM transactions ORDER BY timestamp DESC, amount DESC */
+
+/*"""
+ SELECT *
+ FROM transactions
+ WHERE date(timestamp, 'unixepoch') = date('now')
+ ORDER BY timestamp DESC, amount DESC;
+ """*/
